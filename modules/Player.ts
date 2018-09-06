@@ -22,21 +22,15 @@ class Player implements IPlayer {
     this.game.addBody(this);
   }
 
-  update() {
-    const { isDown, keys } = this.keyboarder;
-    if (isDown(keys.left)) {
-      this.center.x -= 2;
-    } else if (isDown(keys.right)) {
-      this.center.x += 2;
-    }
+  shoot(bulletCenter) {
+    this.game.addBody(new Bullet(bulletCenter));
+  }
 
-    if (isDown(keys.space)) {
-      const bullet = new Bullet(
-        { x: this.center.x, y: this.center.y - this.size.height },
-        { x: 0, y: -6 },
-      );
-      this.game.addBody(bullet);
-    }
+  update() {
+    const { center: { x, y }, size: { height }, keyboarder: { isDown, keys } } = this;
+    isDown(keys.left) && (this.center.x -= 2);
+    isDown(keys.right) && (this.center.x += 2);
+    isDown(keys.space) && this.shoot({ x, y: y - height });
   }
 }
 

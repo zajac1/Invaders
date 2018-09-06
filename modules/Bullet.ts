@@ -10,7 +10,7 @@ class Bullet implements IBullet {
     y: number
   };
 
-  constructor(center, velocity) {
+  constructor(center, velocity = { x: 0, y: -6 }) {
     this.size = { width: 3, height: 3 };
     this.center = center;
     this.velocity = velocity;

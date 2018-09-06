@@ -23,12 +23,14 @@ export interface IGame {
   addBody: (body) => void;
   createInvaders: (game) => void;
   colliding: (body1, body2) => boolean;
+  invadersBelow: (invader: IInvader) => boolean;
 }
 
 export interface IPlayer {
   game: IGame;
   center: ICoordinates;
   size: size;
+  shoot: (center: ICoordinates, velocity?: {x: number, y: number}) => void
 }
 
 export interface IBullet {
@@ -52,4 +54,5 @@ export interface IInvader {
   size: size;
   patrolX: number;
   speedX: number;
+  shoot: (center: ICoordinates, velocity?: {x: number, y: number}) => void
 }

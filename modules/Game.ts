@@ -58,6 +58,14 @@ class Game implements IGame {
     });
   }
 
+  invadersBelow(invader) {
+    return this.bodies.filter((body) => {
+      return body instanceof Invader &&
+      body.center.y > invader.center.y &&
+      body.center.x - invader.center.x < invader.size.width;
+    }).length > 0;
+  }
+
   colliding(body1: IPlayer | IInvader, body2: IPlayer | IInvader) {
     return !(body1 === body2 ||
       body1.center.x + body1.size.width / 2 < body2.center.x - body2.size.width / 2 ||

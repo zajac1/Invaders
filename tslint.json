@@ -3,7 +3,10 @@
     "extends": [
         "tslint-config-airbnb"
     ],
-    "jsRules": {},
-    "rules": {},
+    "jsRules": {
+    },
+    "rules": {
+        "no-this-assignment": [true, {"allow-destructuring": true}]
+    },
     "rulesDirectory": []
 }
