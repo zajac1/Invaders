@@ -1,6 +1,7 @@
 import Player from './Player';
 import Invader from './Invader';
 import { IGame, IScreen, ICoordinates, IPlayer, IInvader } from './interfaces.d';
+import { INVADERS_NUMBER, INVADERS_COLUMNS, INVADERS_ROWS, INVADERS_SPACING } from './consts';
 
 class Game implements IGame {
 
@@ -29,7 +30,7 @@ class Game implements IGame {
   addBody = body => this.bodies.push(body);
 
   drawRect(screen: IScreen, body) {
-
+    screen.fillStyle = '#fff';
     screen.fillRect(
       body.center.x - body.size.width / 2,
       body.center.y - body.size.height / 2,
@@ -50,10 +51,9 @@ class Game implements IGame {
   }
 
   createInvaders(game) {
-    const invadersNumber = 24;
-    const invaders = [...Array(invadersNumber)].map((invader, index) => {
-      const x = 30 + (index % 8) * 30;
-      const y = 30 + (index % 3) * 30;
+    const invaders = [...Array(INVADERS_NUMBER)].map((invader, index) => {
+      const x = INVADERS_SPACING + (index % INVADERS_COLUMNS) * INVADERS_SPACING;
+      const y = INVADERS_SPACING + (index % INVADERS_ROWS) * INVADERS_SPACING;
       this.addBody(new Invader(game, { x, y }));
     });
   }

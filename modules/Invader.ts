@@ -1,6 +1,7 @@
 // TODO: do we need game here?
 import { IInvader, IGame, ICoordinates, size } from './interfaces';
 import Bullet from './Bullet';
+import { INVADERS_NUMBER } from './consts';
 class Invader implements IInvader {
   game: IGame;
   center: ICoordinates;
@@ -24,8 +25,8 @@ class Invader implements IInvader {
   }
 
   update() {
-    const { center: { x, y }, size: { height }, game } = this;
-    if (this.patrolX < 0 || this.patrolX > 40) {
+    const { center: { x, y }, size: { width, height }, game } = this;
+    if (this.patrolX < 0 || this.patrolX > game.canvas.width - ((width + 30) * 6)) {
       this.speedX = -this.speedX;
     }
 

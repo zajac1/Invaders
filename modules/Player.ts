@@ -4,6 +4,7 @@ import Bullet from './Bullet';
 class Player implements IPlayer {
 
   game: IGame;
+  gameSize: ICoordinates;
   center: ICoordinates;
   size: {
     width: number;
@@ -13,6 +14,7 @@ class Player implements IPlayer {
 
   constructor(game: IGame, gameSize: ICoordinates) {
     this.game = game;
+    this.gameSize = gameSize;
     this.size = {
       width: 15,
       height: 15,
@@ -26,10 +28,19 @@ class Player implements IPlayer {
     this.game.addBody(new Bullet(bulletCenter));
   }
 
+  move(direction) {
+    const { size: { width }, center: { x }, gameSize } = this;
+    if (direction === 'left' && x - width > 0) {
+      this.center.x -= 2;
+    } else if (direction === 'right' && x + width < gameSize.x) {
+      this.center.x += 2;
+    }
+  }
+
   update() {
     const { center: { x, y }, size: { height }, keyboarder: { isDown, keys } } = this;
-    isDown(keys.left) && (this.center.x -= 2);
-    isDown(keys.right) && (this.center.x += 2);
+    isDown(keys.left) && this.move('left');
+    isDown(keys.right) && this.move('right');
     isDown(keys.space) && this.shoot({ x, y: y - height });
   }
 }

@@ -1,3 +1,4 @@
+// TODO: prevent bullet colission with themselves
 import { ICoordinates, IBullet } from './interfaces';
 class Bullet implements IBullet {
   center: ICoordinates;
